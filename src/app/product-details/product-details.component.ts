@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Product, products } from '../products';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,17 @@ export class ProductDetailsComponent implements OnInit {
 
   product: Product | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private cartService: CartService) {
+
+  };
+
+  addToCart(product: Product){  //принимает текущее значение product в качестве аргумента
+    this.cartService.addToCart(product);  //использует метод CartService для добавления товара в корзину
+    window.alert('Your product has been added to the cart!');
+  }
+
 
   ngOnInit() {
 
